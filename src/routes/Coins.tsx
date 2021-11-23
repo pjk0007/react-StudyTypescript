@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { fetchCoins } from '../api';
 
@@ -65,15 +64,6 @@ interface ICoinInterface{
 
 function Coins(){
     const { isLoading, data } = useQuery<ICoinInterface[]>("allCoins", fetchCoins);
-    /* const [coins, setCoins] = useState<CoinInterface[]>([]);
-    const [loading, setLoading] = useState(true);
-    useEffect(() => {
-        (async()=>{
-            
-            setCoins(json.slice(0,100));
-            setLoading(false);
-        })();
-    }, []) */
     return (
         <Container>
             <Header>
