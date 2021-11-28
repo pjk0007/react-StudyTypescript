@@ -144,7 +144,13 @@ function Coin(){
     const priceMatch = useMatch("/:coinId/price");
     const chartMatch = useMatch("/:coinId/chart");
     const {isLoading: infoLoading, data: infoData} = useQuery<IInfoData>(["info",coinId], () => fetchCoinInfo(coinId));
-    const {isLoading: tickersLoading, data: tickersData} = useQuery<ITickersData>(["tickers",coinId], () => fetchCoinTickers(coinId));
+    const {isLoading: tickersLoading, data: tickersData} = useQuery<ITickersData>(
+        ["tickers",coinId],
+        () => fetchCoinTickers(coinId),
+        {
+            refetchInterval:5000,
+        }
+    );
 
     const loading = infoLoading || tickersLoading;
     return (
@@ -168,8 +174,8 @@ function Coin(){
                     <span>${infoData?.symbol}</span>
                     </OverviewItem>
                     <OverviewItem>
-                    <span>Open Source:</span>
-                    <span>{infoData?.open_source ? "Yes" : "No"}</span>
+                    <span>Price:</span>
+                    <span>${tickersData?.quotes.USD.price.toFixed(3)}</span>
                     </OverviewItem>
                 </Overview>
                 <Description>{infoData?.description}</Description>
