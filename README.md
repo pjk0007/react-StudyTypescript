@@ -345,3 +345,141 @@ function Coin(){
     ...
 }
 ```
+
+### 5. react-helmet
+
+자식 컴포넌트들에서 index.html의 header에 접근할 때 사용한다.
+
+#### 1) 설치
+
+```powershell
+npm install @types/react-helmet
+```
+
+#### 2) 사용
+
+자식컴포넌트에 helmet을 import한다.
+return 함수 안에 Helmet 컴포넌트를 사용하고 그 안에 header태그 안의 내용을 작성한다.
+
+```tsx
+// Coins.tsx
+import { Helmet } from "react-helmet";
+...
+
+function Coins() {
+  ...
+  return (
+    <Container>
+      <Helmet>
+        <title>코인</title>
+      </Helmet>
+    ...
+    </Container>
+  );
+}
+
+export default Coins;
+```
+
+### 6. recoil
+
+글로벌로 스테이트를 관리하는 컴포넌트이다.
+최상단 컴포넌트부터 최하단 컴포넌트까지 변수를 전달할 때 props를 보내는 것이 번거로워,
+recoil을 사용하여 글로벌 변수로 선언하고 각 컴포넌트에서 접근이 가능하다.
+
+#### 1) 설치
+
+```powershell
+npm install recoil
+```
+
+#### 2) 사용
+
+- _index.tsx_ 에서 RecoilRoot 컴포넌트로 감싸준다.
+
+```tsx
+// index.tsx
+import { RecoilRoot } from "recoil";
+...
+
+ReactDOM.render(
+  <React.StrictMode>
+    <RecoilRoot>
+      ...
+        <App />
+      ...
+    </RecoilRoot>
+  </React.StrictMode>,
+  document.getElementById("root");
+);
+
+```
+
+- 변수 선언
+  _atoms.ts_ 파일을 만들어 글로벌로 사용할 변수들을 정의한다.
+
+```ts
+// atoms.ts
+import { atom } from "recoil";
+
+export const isDarkAtom = atom({
+  key: "isDark",
+  default: true,
+});
+```
+
+- 컴포넌트에서 변수 사용
+
+recoil, atoms.tsx 를 import한다.
+useRecoilValue를 이용하여 글로벌 변수를 가져온다.
+
+```tsx
+// App.tsx
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "./atoms";
+...
+
+function App() {
+  const isDark = useRecoilValue(isDarkAtom);
+  return (
+    <>
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <GlobalStyle />
+        <Router />
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
+    </>
+  );
+}
+
+export default App;
+```
+
+- 컴포넌트에서 변수 변경
+
+recoil과 atoms.tsx 를 import한다.
+useSetRecoiState 함수를 이용하여 글로벌 변수를 변경해주는 함수를 가져온다.
+
+```tsx
+// Coins.tsx
+import { useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
+...
+
+function Coins() {
+  const setIsDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleIsDarkAtom = () => setIsDarkAtom((prev) => !prev);
+  ...
+  return (
+    <Container>
+      <Header>
+        <Title>코인</Title>
+        <button onClick={toggleIsDarkAtom}>Toggle Mode</button>
+      </Header>
+      ...
+    </Container>
+  );
+}
+
+export default Coins;
+```
