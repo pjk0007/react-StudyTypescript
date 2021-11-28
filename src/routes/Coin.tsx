@@ -5,6 +5,7 @@ import Price from './Price';
 import Chart from './Chart';
 import { useQuery } from 'react-query';
 import { fetchCoinInfo, fetchCoinTickers } from '../api';
+import {Helmet} from "react-helmet";
 
 const Container = styled.div`
     padding: 0 20px;
@@ -155,6 +156,11 @@ function Coin(){
     const loading = infoLoading || tickersLoading;
     return (
         <Container>
+            <Helmet>
+                <title>
+                    {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+                </title>
+            </Helmet>
             <Header>
                 <Title>
                 {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
