@@ -6,6 +6,7 @@ import Chart from "./Chart";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import { Helmet } from "react-helmet";
+import CandleChart from "./CandleChart";
 
 const Container = styled.div`
   padding: 0 20px;
@@ -221,7 +222,7 @@ function Coin() {
 
           <Routes>
             <Route path="price" element={<Price priceData={priceData} />} />
-            <Route path="chart" element={<Chart coinId={coinId} />} />
+            <Route path="chart" element={<CandleChart coinId={coinId} />} />
           </Routes>
         </>
       )}
