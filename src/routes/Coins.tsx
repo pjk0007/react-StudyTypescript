@@ -73,10 +73,10 @@ function Coins() {
   return (
     <Container>
       <Helmet>
-        <title>코인</title>
+        <title>COINS</title>
       </Helmet>
       <Header>
-        <Title>코인</Title>
+        <Title>COINS</Title>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>

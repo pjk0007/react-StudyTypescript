@@ -163,7 +163,7 @@ function Coin() {
         refetchInterval: 5000,
       }
     );
-
+  const priceData = tickersData?.quotes.USD;
   const loading = infoLoading || tickersLoading;
   return (
     <Container>
@@ -220,7 +220,7 @@ function Coin() {
           </Tabs>
 
           <Routes>
-            <Route path="price" element={<Price />} />
+            <Route path="price" element={<Price priceData={priceData} />} />
             <Route path="chart" element={<Chart coinId={coinId} />} />
           </Routes>
         </>
