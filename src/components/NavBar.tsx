@@ -37,7 +37,7 @@ function NavBar() {
       <Home>
         <Link
           to={{
-            pathname: `/`,
+            pathname: process.env.PUBLIC_URL + `/`,
           }}
         >
           NOMAD COIN

@@ -174,7 +174,7 @@ function Coin() {
       </Helmet>
       <Header>
         <Back>
-          <Link to={{ pathname: `/` }}>👈🏻</Link>
+          <Link to={{ pathname: process.env.PUBLIC_URL + `/` }}>👈🏻</Link>
         </Back>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
@@ -212,10 +212,14 @@ function Coin() {
           </Overview>
           <Tabs>
             <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`}>Price</Link>
+              <Link to={process.env.PUBLIC_URL + `/${coinId}/price`}>
+                Price
+              </Link>
             </Tab>
             <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinId}/chart`}>Chart</Link>
+              <Link to={process.env.PUBLIC_URL + `/${coinId}/chart`}>
+                Chart
+              </Link>
             </Tab>
           </Tabs>
 
