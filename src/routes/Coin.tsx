@@ -149,8 +149,8 @@ interface ITickersData {
 function Coin() {
   const { coinId } = useParams() as RouteParams;
   const { state } = useLocation();
-  const priceMatch = useMatch("/:coinId/price");
-  const chartMatch = useMatch("/:coinId/chart");
+  const priceMatch = useMatch(process.env.PUBLIC_URL + "/:coinId/price");
+  const chartMatch = useMatch(process.env.PUBLIC_URL + "/:coinId/chart");
   const { isLoading: infoLoading, data: infoData } = useQuery<IInfoData>(
     ["info", coinId],
     () => fetchCoinInfo(coinId)

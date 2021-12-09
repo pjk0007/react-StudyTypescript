@@ -14,14 +14,14 @@ const Head = styled.div`
 `;
 
 const Home = styled.div`
-  font-size: 40px;
+  font-size: 25px;
   font-weight: 600;
 `;
 
 const Toggle = styled.button`
   background-color: ${(props) => props.theme.accentColor};
   color: ${(props) => props.theme.textColor};
-  padding: 10px 15px;
+  padding: 7px 10px;
   border-radius: 10px;
   border: none;
   cursor: pointer;
