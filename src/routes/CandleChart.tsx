@@ -47,7 +47,7 @@ function CandleChart({ coinId }: ChartProps) {
               mode: isDark ? "dark" : "light",
             },
             title: {
-              text: `${coinId} 30days Chart`,
+              text: `30 Days`,
               align: "left",
             },
             chart: {
